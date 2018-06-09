@@ -2,10 +2,13 @@
     getResource("./api/message", displayResult);
 
     function displayResult(result) {
-        var paragraph = document.createElement("p");
-        paragraph.classList.add("center")
-        paragraph.innerHTML = result + " - displayed through a script!"
-        document.getElementsByTagName('body')[0].appendChild(paragraph);
+        var messages = JSON.parse(result);
+        var messagesDiv = document.getElementById("messages");
+        messages.forEach(function(item) {
+            var div = document.createElement("div");
+            div.innerHTML = item["message"];
+            messagesDiv.appendChild(div);
+        })
     }
 
     function getResource(url, callback) {

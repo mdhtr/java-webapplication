@@ -1,5 +1,6 @@
 package mdhtr.webapplication;
 
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -9,6 +10,7 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 import static org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters.RESTEASY_SERVLET_MAPPING_PREFIX;
 
+@Slf4j
 public class JettyServer {
     private static final String JAVAX_WS_RS_APPLICATION = "javax.ws.rs.Application";
 
@@ -22,6 +24,7 @@ public class JettyServer {
     private static final String ANY_PATH = "/*";
 
     private final Server server;
+    private int port;
 
     public static void main(String[] args) {
         try {
@@ -33,18 +36,20 @@ public class JettyServer {
     }
 
     public JettyServer(int port) {
-        server = createServer(port);
+        this.port = port;
+        this.server = createServer();
     }
 
     public void start() throws Exception {
         server.start();
+        log.info("Jetty Server started on port {}", port);
     }
 
     public void stop() throws Exception {
         server.stop();
     }
 
-    private Server createServer(int port) {
+    private Server createServer() {
         Server server = new Server(port);
         enableGracefulShutdown(server);
         server.setHandler(createContextHandler());

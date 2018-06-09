@@ -7,6 +7,12 @@
 </head>
 <body>
 <h1 class="center">Hello World!</h1>
+<form class="center" action="/api/message" method="post">
+    <label for="message">Message:</label>
+    <input id="message" type="text" name="message">
+    <input type="submit">
+</form>
+<div class="center" id="messages"></div>
 <script src="script/webapp.js"></script>
 </body>
 </html>
