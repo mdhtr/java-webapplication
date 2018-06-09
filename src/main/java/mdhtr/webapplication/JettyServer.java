@@ -17,6 +17,8 @@ public class JettyServer {
 
         Server server = new Server(8080);
         server.setHandler(contextHandler);
+        server.setStopAtShutdown(true); // shut down more gracefully
+        server.setStopTimeout(5000); // shut down more gracefully
         try {
             server.start();
             server.join();
