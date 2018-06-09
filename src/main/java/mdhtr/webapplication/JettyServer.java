@@ -1,19 +1,20 @@
 package mdhtr.webapplication;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.resource.Resource;
 
 public class JettyServer {
 
     public static void main(String[] args) {
-        ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase("./target/classes/mdhtr/webapplication/public/");
-        resourceHandler.setDirectoriesListed(false);
+        ServletContextHandler contextHandler = new ServletContextHandler();
+        contextHandler.setContextPath("/"); // root of the server
 
-        ContextHandler contextHandler = new ContextHandler();
-        contextHandler.setContextPath("/webapp/"); // custom base path
-        contextHandler.setHandler(resourceHandler);
+        // add DefaultServlet to serve static files from ResourceBase
+        contextHandler.setBaseResource(
+                Resource.newResource(JettyServer.class.getResource("/mdhtr/webapplication/public/")));
+        contextHandler.addServlet(DefaultServlet.class,"/");
 
         Server server = new Server(8080);
         server.setHandler(contextHandler);
