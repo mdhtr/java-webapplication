@@ -8,11 +8,11 @@ public class JettyServer {
 
     public static void main(String[] args) {
         ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase("/"); // root of the file system
-        resourceHandler.setDirectoriesListed(true);
+        resourceHandler.setResourceBase("./target/classes/mdhtr/webapplication/public/");
+        resourceHandler.setDirectoriesListed(false);
 
         ContextHandler contextHandler = new ContextHandler();
-        contextHandler.setContextPath("/"); // root of the server
+        contextHandler.setContextPath("/webapp/"); // custom base path
         contextHandler.setHandler(resourceHandler);
 
         Server server = new Server(8080);
