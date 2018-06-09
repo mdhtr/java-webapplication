@@ -8,15 +8,20 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 public class JettyServer {
+    private final Server server;
 
-    public static void main(String[] args) {
+    public JettyServer(int port) {
+        server = createServer(port);
+    }
+
+    private Server createServer(int port) {
         ServletContextHandler contextHandler = new ServletContextHandler();
         contextHandler.setContextPath("/"); // root of the server
 
         // add DefaultServlet to serve static files from ResourceBase
         contextHandler.setBaseResource(
                 Resource.newResource(JettyServer.class.getResource("/mdhtr/webapplication/public/")));
-        contextHandler.addServlet(DefaultServlet.class,"/");
+        contextHandler.addServlet(DefaultServlet.class, "/");
 
         // add RESTEasy servlet at "/api/*".
         ServletHolder restEasyServlet = new ServletHolder(new HttpServletDispatcher());
@@ -24,15 +29,28 @@ public class JettyServer {
         restEasyServlet.setInitParameter("javax.ws.rs.Application", HelloWorldApplication.class.getName());
         contextHandler.addServlet(restEasyServlet, "/api/*");
 
-        Server server = new Server(8080);
+        Server server = new Server(port);
         server.setHandler(contextHandler);
         server.setStopAtShutdown(true); // shut down more gracefully
         server.setStopTimeout(5000); // shut down more gracefully
+
+        return server;
+    }
+
+    public static void main(String[] args) {
         try {
+            JettyServer server = new JettyServer(8080);
             server.start();
-            server.join();
-        } catch (Exception e ) {
+        } catch (Exception e) {
             throw new RuntimeException("Exception while starting embedded Jetty server", e);
         }
+    }
+
+    public void start() throws Exception {
+        server.start();
+    }
+
+    public void stop() throws Exception {
+        server.stop();
     }
 }
