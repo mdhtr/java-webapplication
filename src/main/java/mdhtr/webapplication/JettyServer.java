@@ -23,8 +23,37 @@ public class JettyServer {
 
     private final Server server;
 
+    public static void main(String[] args) {
+        try {
+            JettyServer server = new JettyServer(DEFAULT_PORT);
+            server.start();
+        } catch (Exception e) {
+            throw new RuntimeException("Exception while starting embedded Jetty server", e);
+        }
+    }
+
     public JettyServer(int port) {
         server = createServer(port);
+    }
+
+    public void start() throws Exception {
+        server.start();
+    }
+
+    public void stop() throws Exception {
+        server.stop();
+    }
+
+    private Server createServer(int port) {
+        Server server = new Server(port);
+        enableGracefulShutdown(server);
+        server.setHandler(createContextHandler());
+        return server;
+    }
+
+    private void enableGracefulShutdown(Server server) {
+        server.setStopAtShutdown(true);
+        server.setStopTimeout(STOP_TIMEOUT_MILLISECONDS);
     }
 
     private ServletContextHandler createContextHandler() {
@@ -46,34 +75,5 @@ public class JettyServer {
         restEasyServlet.setInitParameter(RESTEASY_SERVLET_MAPPING_PREFIX, REST_API_BASE_PATH);
         restEasyServlet.setInitParameter(JAVAX_WS_RS_APPLICATION, HelloWorldApplication.class.getName());
         contextHandler.addServlet(restEasyServlet, REST_API_BASE_PATH + ANY_PATH);
-    }
-
-    private Server createServer(int port) {
-        Server server = new Server(port);
-        server.setHandler(createContextHandler());
-        enableGracefulShutdown(server);
-        return server;
-    }
-
-    private void enableGracefulShutdown(Server server) {
-        server.setStopAtShutdown(true);
-        server.setStopTimeout(STOP_TIMEOUT_MILLISECONDS);
-    }
-
-    public static void main(String[] args) {
-        try {
-            JettyServer server = new JettyServer(DEFAULT_PORT);
-            server.start();
-        } catch (Exception e) {
-            throw new RuntimeException("Exception while starting embedded Jetty server", e);
-        }
-    }
-
-    public void start() throws Exception {
-        server.start();
-    }
-
-    public void stop() throws Exception {
-        server.stop();
     }
 }
