@@ -2,7 +2,6 @@ package mdhtr.webapplication.integration;
 
 import com.google.common.collect.ImmutableList;
 import io.restassured.http.ContentType;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import mdhtr.webapplication.JettyServer;
 import mdhtr.webapplication.persistence.Message;
 import mdhtr.webapplication.persistence.MessageDao;
@@ -22,6 +21,7 @@ class EndpointIntegrationTest {
     private static String MESSAGE = "test message";
     private static List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
     private static String JSON_MESSAGES = "[{\"id\": \"1\", \"message\": \"Hello\"}]";
+
     private MessageDao dao = new MessageDao();
     private JettyServer server;
 

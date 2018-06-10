@@ -27,8 +27,8 @@ public class JettyServer {
     private int port;
 
     public static void main(String[] args) {
+        JettyServer server = new JettyServer(DEFAULT_PORT);
         try {
-            JettyServer server = new JettyServer(DEFAULT_PORT);
             server.start();
         } catch (Exception e) {
             throw new RuntimeException("Exception while starting embedded Jetty server", e);
@@ -78,7 +78,7 @@ public class JettyServer {
     private void addRestEasyServlet(ServletContextHandler contextHandler) {
         ServletHolder restEasyServlet = new ServletHolder(new HttpServletDispatcher());
         restEasyServlet.setInitParameter(RESTEASY_SERVLET_MAPPING_PREFIX, REST_API_BASE_PATH);
-        restEasyServlet.setInitParameter(JAVAX_WS_RS_APPLICATION, HelloWorldApplication.class.getName());
+        restEasyServlet.setInitParameter(JAVAX_WS_RS_APPLICATION, JavaxWsRsApplication.class.getName());
         contextHandler.addServlet(restEasyServlet, REST_API_BASE_PATH + ANY_PATH);
     }
 }

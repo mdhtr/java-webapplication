@@ -19,15 +19,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class HelloWorldEndpointTest {
+class MessageEndpointTest {
     private static String MESSAGE = "test message";
     private static List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
     @Mock private MessageDao dao;
-    private HelloWorldEndpoint endpoint;
+    private MessageEndpoint endpoint;
 
     @BeforeEach
     void setUp() {
-        endpoint = new HelloWorldEndpoint(dao);
+        endpoint = new MessageEndpoint(dao);
     }
 
     @Test

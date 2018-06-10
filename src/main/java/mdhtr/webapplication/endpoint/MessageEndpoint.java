@@ -13,17 +13,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/")
+@Path("/message")
 @RequiredArgsConstructor
-public class HelloWorldEndpoint {
+public class MessageEndpoint {
     private final MessageDao dao;
 
-    public HelloWorldEndpoint() {
+    public MessageEndpoint() {
         dao = new MessageDao();
     }
 
     @GET
-    @Path("/message")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Message> getMessages() {
         return dao.getAll();
@@ -31,7 +31,7 @@ public class HelloWorldEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Path("/message")
+    @Path("/")
     public void addMessage(@FormParam("message") String message) {
         dao.add(message);
     }
