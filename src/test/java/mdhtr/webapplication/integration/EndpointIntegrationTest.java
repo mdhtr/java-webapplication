@@ -46,6 +46,17 @@ class EndpointIntegrationTest {
 
     @Disabled("not fixed yet")
     @Test
+    void echo_whenCalledWithMessage_returnsMessages() {
+        dao.add(MESSAGE);
+        given()
+                .when()
+                .get("/api/healthz")
+                .then()
+                .statusCode(204);
+    }
+
+    @Disabled("not fixed yet")
+    @Test
     void getMessage_whenCalled_returnsMessagesFromDatabase() {
         dao.add(MESSAGE);
         given()
