@@ -3,11 +3,11 @@ package mdhtr.webapplication.integration;
 import com.google.common.collect.ImmutableList;
 import io.restassured.http.ContentType;
 import mdhtr.webapplication.JettyServer;
+import mdhtr.webapplication.persistence.H2InMemoryDb;
 import mdhtr.webapplication.persistence.Message;
 import mdhtr.webapplication.persistence.MessageDao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,18 +16,23 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 class EndpointIntegrationTest {
+    private static final int TEST_PORT = 9000;
+    private static final String TEST_DB_URL = "jdbc:h2:mem:test";
+    private static final String TEST_DB_USER = "";
+    private static final String TEST_DB_PASSWORD = "";
     private static String MESSAGE = "test message";
     private static List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
-    private static String JSON_MESSAGES = "[{\"id\": \"1\", \"message\": \"Hello\"}]";
+    private static String JSON_MESSAGES = "[{\"id\":1,\"message\":\"test message\"}]";
 
-    private MessageDao dao = new MessageDao();
+    private MessageDao dao;
     private JettyServer server;
 
     @BeforeEach
     void setUp() {
-        server = new JettyServer(9000);
+        H2InMemoryDb.initInstance(TEST_DB_URL, TEST_DB_USER, TEST_DB_PASSWORD);
+        dao = new MessageDao();
+        server = new JettyServer(TEST_PORT);
         try {
             server.start();
         } catch (Exception e) {
@@ -37,6 +42,7 @@ class EndpointIntegrationTest {
 
     @AfterEach
     void tearDown() {
+        H2InMemoryDb.destroyInstance();
         try {
             server.stop();
         } catch (Exception e) {
@@ -44,22 +50,22 @@ class EndpointIntegrationTest {
         }
     }
 
-    @Disabled("not fixed yet")
     @Test
     void echo_whenCalledWithMessage_returnsMessages() {
         dao.add(MESSAGE);
         given()
+                .port(TEST_PORT)
                 .when()
                 .get("/api/healthz")
                 .then()
-                .statusCode(204);
+                .statusCode(200);
     }
 
-    @Disabled("not fixed yet")
     @Test
     void getMessage_whenCalled_returnsMessagesFromDatabase() {
         dao.add(MESSAGE);
         given()
+                .port(TEST_PORT)
                 .when()
                 .get("/api/message")
                 .then()
@@ -68,10 +74,10 @@ class EndpointIntegrationTest {
                 .body(is(JSON_MESSAGES));
     }
 
-    @Disabled("not fixed yet")
     @Test
     void postMessage_whenCalled_persistsMessage() {
         given()
+                .port(TEST_PORT)
                 .contentType(ContentType.URLENC)
                 .formParam("message", MESSAGE)
                 .when()

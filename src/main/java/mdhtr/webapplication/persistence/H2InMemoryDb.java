@@ -1,40 +1,50 @@
 package mdhtr.webapplication.persistence;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class H2InMemoryDb {
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+public class H2InMemoryDb {
     private static final String DRIVER = "org.h2.Driver";
-    private static final String URL = "jdbc:h2:mem:mdhtr;DB_CLOSE_DELAY=-1";
-    private static final String USER = "";
-    private static final String PASSWORD = "";
 
-    private static H2InMemoryDb instance = new H2InMemoryDb(DRIVER, URL, USER, PASSWORD);
+    private static H2InMemoryDb instance;
 
     private final String url;
     private final String user;
     private final String password;
 
+    public static void initInstance(String url, String user, String password) {
+        if (instance != null) {
+            throw new RuntimeException("Static database instance is already initialized.");
+        }
+        instance = new H2InMemoryDb(url, user, password);
+        instance.loadDatabaseDriver();
+        instance.createTables();
+    }
+
+    public static void destroyInstance() {
+        instance.deleteTables();
+        instance = null;
+    }
+
     static H2InMemoryDb getInstance() {
         return instance;
     }
 
-    private H2InMemoryDb(String driver, String url, String user, String password) {
-        this.url = url;
-        this.user = user;
-        this.password = password;
-
-        loadDatabaseDriver(driver);
-        createTables();
+    Connection getConnection() {
+        return createConnection();
     }
 
-    private void loadDatabaseDriver(String driver) {
+    private void loadDatabaseDriver() {
         try {
-            Class.forName(driver).newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            throw new RuntimeException(String.format("Class for database driver %s not found", driver), e);
+            throw new RuntimeException(String.format("Class for database driver %s not found", DRIVER), e);
         }
     }
 
@@ -62,7 +72,19 @@ class H2InMemoryDb {
         statement.close();
     }
 
-    Connection getConnection() {
-        return createConnection();
+    private void deleteTables() {
+        try {
+            Connection connection = getConnection();
+            deleteMessageTable(connection);
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteMessageTable(Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.execute("DROP TABLE MESSAGE");
+        statement.close();
     }
 }

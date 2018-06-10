@@ -15,7 +15,6 @@ public class JettyServer {
     private static final String JAVAX_WS_RS_APPLICATION = "javax.ws.rs.Application";
 
     private static final int STOP_TIMEOUT_MILLISECONDS = 5000;
-    private static final int DEFAULT_PORT = 8080;
     private static final String STATIC_CONTENT_RESOURCE_PATH = "/mdhtr/webapplication/public/";
 
     private static final String CONTEXT_PATH = "/";
@@ -26,14 +25,6 @@ public class JettyServer {
     private final Server server;
     private int port;
 
-    public static void main(String[] args) {
-        JettyServer server = new JettyServer(DEFAULT_PORT);
-        try {
-            server.start();
-        } catch (Exception e) {
-            throw new RuntimeException("Exception while starting embedded Jetty server", e);
-        }
-    }
 
     public JettyServer(int port) {
         this.port = port;
