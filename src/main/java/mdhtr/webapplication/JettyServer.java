@@ -1,5 +1,6 @@
 package mdhtr.webapplication;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -7,6 +8,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
+
+import java.util.Objects;
 
 import static org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters.RESTEASY_SERVLET_MAPPING_PREFIX;
 
@@ -16,6 +19,7 @@ public class JettyServer {
 
     private static final int STOP_TIMEOUT_MILLISECONDS = 5000;
     private static final String STATIC_CONTENT_RESOURCE_PATH = "/mdhtr/webapplication/public/";
+    private static final String SYSTEM_PROPERTY_STATIC_CONTENT_SOURCE_FOLDER = "static-content-source-folder";
 
     private static final String CONTEXT_PATH = "/";
     private static final String STATIC_CONTENT_BASE_PATH = "/";
@@ -61,9 +65,15 @@ public class JettyServer {
     }
 
     private void addStaticFileServlet(ServletContextHandler contextHandler) {
-        contextHandler.setBaseResource(
-                Resource.newResource(JettyServer.class.getResource(STATIC_CONTENT_RESOURCE_PATH)));
+        contextHandler.setBaseResource(getStaticResource());
         contextHandler.addServlet(DefaultServlet.class, STATIC_CONTENT_BASE_PATH);
+    }
+
+    @SneakyThrows
+    private Resource getStaticResource() {
+        return Objects.nonNull(System.getProperty(SYSTEM_PROPERTY_STATIC_CONTENT_SOURCE_FOLDER)) ?
+                Resource.newResource(System.getProperty(SYSTEM_PROPERTY_STATIC_CONTENT_SOURCE_FOLDER)) :
+                Resource.newClassPathResource(STATIC_CONTENT_RESOURCE_PATH);
     }
 
     private void addRestEasyServlet(ServletContextHandler contextHandler) {
