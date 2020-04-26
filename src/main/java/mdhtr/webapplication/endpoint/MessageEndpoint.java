@@ -33,6 +33,8 @@ public class MessageEndpoint {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/")
     public void addMessage(@FormParam("message") String message) {
-        dao.add(message);
+        if(!message.isBlank()) {
+            dao.add(message);
+        }
     }
 }
