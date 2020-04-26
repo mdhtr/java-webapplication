@@ -79,6 +79,48 @@ class TestEndpointIntegrationTest {
     }
 
     @Test
+    void serializeWrongJson_shouldHandleJsonParseException() {
+        given()
+                .port(TEST_PORT)
+                .contentType(ContentType.JSON)
+                .body("{\"wrong json\"}")
+                .when()
+                .post("/api/test/jsonError")
+                .then()
+                .body(is("Could not parse JSON object"))
+                .statusCode(400)
+        ;
+    }
+
+    @Test
+    void serializeWrongJson_shouldHandleJsonUnrecognizedPropertyException() {
+        given()
+                .port(TEST_PORT)
+                .contentType(ContentType.JSON)
+                .body("{\"unknownProperty\": \"anyValue\"}")
+                .when()
+                .post("/api/test/jsonError")
+                .then()
+                .statusCode(400)
+                .body(is("Property not recognized"))
+        ;
+    }
+
+    @Test
+    void serializeWrongJson_shouldHandleJsonParseException2() {
+        given()
+                .port(TEST_PORT)
+                .contentType(ContentType.JSON)
+                .body("{\"number\": \"notANumber\"}")
+                .when()
+                .post("/api/test/jsonError")
+                .then()
+                .statusCode(400)
+                .body(is("Could not map JSON object: invalid format"))
+        ;
+    }
+
+    @Test
     void handleGenericException() {
         given()
                 .port(TEST_PORT)
