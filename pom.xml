@@ -20,6 +20,7 @@
         <guava.version>29.0-jre</guava.version>
         <h2.version>1.4.200</h2.version>
         <lombok.version>1.18.12</lombok.version>
+        <jackson.version>2.11.0</jackson.version>
         <hamcrest-core.version>2.2</hamcrest-core.version>
         <rest-assured.version>4.3.0</rest-assured.version>
         <selenium-jupiter.version>3.3.4</selenium-jupiter.version>
@@ -88,6 +89,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <!-- TEST DEPENDENCIES -->
         <dependency>
