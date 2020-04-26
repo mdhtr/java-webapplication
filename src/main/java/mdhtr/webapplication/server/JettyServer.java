@@ -2,6 +2,8 @@ package mdhtr.webapplication.server;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import mdhtr.webapplication.server.error.DefaultExceptionMapper;
+import mdhtr.webapplication.server.error.WebApplicationExceptionMapper;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.server.handler.StatisticsHandler;

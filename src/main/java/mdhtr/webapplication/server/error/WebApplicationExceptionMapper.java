@@ -1,4 +1,4 @@
-package mdhtr.webapplication.server;
+package mdhtr.webapplication.server.error;
 
 import lombok.extern.slf4j.Slf4j;
 
