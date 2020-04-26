@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class EndpointIntegrationTest {
+class MessageEndpointIntegrationTest {
     private static final int TEST_PORT = 9000;
     private static final String TEST_DB_URL = "jdbc:h2:mem:test";
     private static final String TEST_DB_USER = "";
