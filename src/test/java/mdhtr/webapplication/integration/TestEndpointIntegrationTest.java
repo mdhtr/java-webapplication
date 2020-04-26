@@ -77,4 +77,16 @@ class TestEndpointIntegrationTest {
                 .statusCode(200)
                 .body(is(JSON_MESSAGE_DTO_WITH_DATE));
     }
+
+    @Test
+    void throwException() {
+        given()
+                .port(TEST_PORT)
+                .when()
+                .get("/api/test/throw")
+                .then()
+                .body(is(""))
+                .statusCode(500)
+        ;
+    }
 }

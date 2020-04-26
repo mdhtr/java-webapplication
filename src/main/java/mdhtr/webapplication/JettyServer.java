@@ -13,6 +13,7 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 
 import java.util.Objects;
 
+import static org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters.RESTEASY_PROVIDERS;
 import static org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters.RESTEASY_SERVLET_MAPPING_PREFIX;
 
 @Slf4j
@@ -84,6 +85,7 @@ public class JettyServer {
         ServletHolder restEasyServlet = new ServletHolder(new HttpServletDispatcher());
         restEasyServlet.setInitParameter(RESTEASY_SERVLET_MAPPING_PREFIX, REST_API_BASE_PATH);
         restEasyServlet.setInitParameter(JAVAX_WS_RS_APPLICATION, JavaxWsRsApplication.class.getName());
+        restEasyServlet.setInitParameter(RESTEASY_PROVIDERS, DefaultExceptionMapper.class.getName());
         contextHandler.addServlet(restEasyServlet, REST_API_BASE_PATH + ANY_PATH);
     }
 }

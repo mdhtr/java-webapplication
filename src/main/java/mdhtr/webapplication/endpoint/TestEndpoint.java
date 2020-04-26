@@ -3,6 +3,7 @@ package mdhtr.webapplication.endpoint;
 import mdhtr.webapplication.endpoint.dto.TestDto;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,5 +17,11 @@ public class TestEndpoint {
     @Path("/json")
     public TestDto serializeJson(TestDto testDto) {
         return testDto;
+    }
+
+    @GET
+    @Path("/throw")
+    public void throwException() {
+        throw new RuntimeException("custom exception");
     }
 }
