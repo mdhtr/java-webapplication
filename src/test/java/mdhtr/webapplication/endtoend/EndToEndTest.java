@@ -1,6 +1,6 @@
 package mdhtr.webapplication.endtoend;
 
-import io.github.bonigarcia.SeleniumExtension;
+import io.github.bonigarcia.seljup.SeleniumExtension;
 import mdhtr.webapplication.JettyServer;
 import mdhtr.webapplication.persistence.H2InMemoryDb;
 import org.junit.jupiter.api.AfterEach;
