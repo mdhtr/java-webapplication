@@ -79,7 +79,7 @@ class TestEndpointIntegrationTest {
     }
 
     @Test
-    void throwException() {
+    void handleGenericException() {
         given()
                 .port(TEST_PORT)
                 .when()
@@ -87,6 +87,18 @@ class TestEndpointIntegrationTest {
                 .then()
                 .body(is(""))
                 .statusCode(500)
+        ;
+    }
+
+    @Test
+    void handleGenericWebApplicationException() {
+        given()
+                .port(TEST_PORT)
+                .when()
+                .get("/api/test/non-existing-endpoint")
+                .then()
+                .body(is(""))
+                .statusCode(404)
         ;
     }
 }
