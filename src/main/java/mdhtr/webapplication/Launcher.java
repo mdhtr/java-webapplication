@@ -1,6 +1,7 @@
 package mdhtr.webapplication;
 
 import mdhtr.webapplication.persistence.H2InMemoryDb;
+import mdhtr.webapplication.server.JettyServer;
 
 public class Launcher {
     private static final int DEFAULT_PORT = 8080;

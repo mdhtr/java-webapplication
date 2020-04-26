@@ -1,4 +1,4 @@
-package mdhtr.webapplication;
+package mdhtr.webapplication.server;
 
 import com.google.common.collect.ImmutableSet;
 import mdhtr.webapplication.endpoint.HealthEndpoint;

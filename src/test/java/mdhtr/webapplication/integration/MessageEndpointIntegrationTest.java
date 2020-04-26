@@ -2,7 +2,7 @@ package mdhtr.webapplication.integration;
 
 import com.google.common.collect.ImmutableList;
 import io.restassured.http.ContentType;
-import mdhtr.webapplication.JettyServer;
+import mdhtr.webapplication.server.JettyServer;
 import mdhtr.webapplication.persistence.H2InMemoryDb;
 import mdhtr.webapplication.persistence.Message;
 import mdhtr.webapplication.persistence.MessageDao;

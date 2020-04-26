@@ -1,7 +1,7 @@
 package mdhtr.webapplication.integration;
 
 import io.restassured.http.ContentType;
-import mdhtr.webapplication.JettyServer;
+import mdhtr.webapplication.server.JettyServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
