@@ -3,6 +3,8 @@ package mdhtr.webapplication;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerWrapper;
+import org.eclipse.jetty.server.handler.StatisticsHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -47,7 +49,9 @@ public class JettyServer {
     private Server createServer() {
         Server server = new Server(port);
         enableGracefulShutdown(server);
-        server.setHandler(createContextHandler());
+        HandlerWrapper statisticsHandler = new StatisticsHandler();
+        statisticsHandler.setHandler(createContextHandler());
+        server.setHandler(statisticsHandler);
         return server;
     }
 
