@@ -2,6 +2,7 @@ package mdhtr.webapplication.server;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import mdhtr.webapplication.server.error.ConstraintViolationExceptionMapper;
 import mdhtr.webapplication.server.error.DefaultExceptionMapper;
 import mdhtr.webapplication.server.error.JsonGeneralExceptionMapper;
 import mdhtr.webapplication.server.error.JsonUnrecognizedPropertyExceptionMapper;
@@ -99,7 +100,8 @@ public class JettyServer {
                 DefaultExceptionMapper.class.getName(),
                 WebApplicationExceptionMapper.class.getName(),
                 JsonGeneralExceptionMapper.class.getName(),
-                JsonUnrecognizedPropertyExceptionMapper.class.getName()
+                JsonUnrecognizedPropertyExceptionMapper.class.getName(),
+                ConstraintViolationExceptionMapper.class.getName()
         ));
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 
 class TestEndpointIntegrationTest {
@@ -107,7 +108,7 @@ class TestEndpointIntegrationTest {
     }
 
     @Test
-    void serializeWrongJson_shouldHandleJsonParseException2() {
+    void serializeWrongJson_shouldHandleJsonMappingException() {
         given()
                 .port(TEST_PORT)
                 .contentType(ContentType.JSON)
@@ -141,6 +142,22 @@ class TestEndpointIntegrationTest {
                 .then()
                 .body(is(""))
                 .statusCode(404)
+        ;
+    }
+
+    @Test
+    void serializeInvalidJson_shouldThrowDescriptiveBadRequest() {
+        given()
+                .port(TEST_PORT)
+                .contentType(ContentType.JSON)
+                .body("{\"number\": \"101\"}")
+                .when()
+                .post("/api/test/validated")
+                .then()
+                .body(containsString("{\"type\":\"/docs/validation_error\",\"title\":\"Validation error\",\"status\":400,\"detail\":"))
+                .body(containsString("text: must not be null"))
+                .body(containsString("number: Number should be less than or equal to 99"))
+                .statusCode(400)
         ;
     }
 }

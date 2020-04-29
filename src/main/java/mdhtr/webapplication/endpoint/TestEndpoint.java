@@ -2,6 +2,7 @@ package mdhtr.webapplication.endpoint;
 
 import mdhtr.webapplication.endpoint.dto.TestDto;
 import mdhtr.webapplication.endpoint.dto.TestErrorDto;
+import mdhtr.webapplication.endpoint.dto.TestValidationDto;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -32,5 +33,13 @@ public class TestEndpoint {
     @Path("/throw")
     public void throwException() {
         throw new RuntimeException("custom exception");
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/validated")
+    public TestValidationDto validateJson(TestValidationDto testDto) {
+        return testDto;
     }
 }
