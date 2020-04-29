@@ -8,6 +8,7 @@ with a bunch of configuration examples
 to serve static frontend files and also REST endpoints
 * How to connect to a H2 in-memory database
 * How to serve static content from resources folder for development
+* How to configure logging with Logback and Slf4j
 ### REST API
 * How to do basic REST endpoints
 * How to process form data in an endpoint
