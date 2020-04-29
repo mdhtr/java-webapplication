@@ -24,7 +24,7 @@
         <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
-        <hibernate-validator.version>6.0.2.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.1.4.Final</hibernate-validator.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.el-impl.version>2.2.6</javax.el-impl.version>
         <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
