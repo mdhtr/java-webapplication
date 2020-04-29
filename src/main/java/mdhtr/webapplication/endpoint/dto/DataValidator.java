@@ -9,7 +9,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-public abstract class DataValidator<T> extends StdConverter<T, T> {
+abstract class DataValidator<T> extends StdConverter<T, T> {
     @Override
     public T convert(T t) {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();

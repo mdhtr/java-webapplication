@@ -10,9 +10,9 @@ import java.util.List;
 public class MessageDao {
 
     public void add(String message) {
-        try(Connection connection = H2InMemoryDb.getInstance().getConnection()){
+        try (Connection connection = H2InMemoryDb.getInstance().getConnection()) {
             String insertQuery = "INSERT INTO MESSAGE" + "(MESSAGE) values" + "(?)";
-            try(PreparedStatement insertPreparedStatement = connection.prepareStatement(insertQuery)) {
+            try (PreparedStatement insertPreparedStatement = connection.prepareStatement(insertQuery)) {
                 insertPreparedStatement.setString(1, message);
                 insertPreparedStatement.executeUpdate();
             } catch (SQLException e) {
@@ -25,9 +25,9 @@ public class MessageDao {
     }
 
     public List<Message> getAll() {
-        try(Connection connection = H2InMemoryDb.getInstance().getConnection()){
+        try (Connection connection = H2InMemoryDb.getInstance().getConnection()) {
             String selectQuery = "select * from MESSAGE";
-            try(PreparedStatement selectPreparedStatement = connection.prepareStatement(selectQuery)) {
+            try (PreparedStatement selectPreparedStatement = connection.prepareStatement(selectQuery)) {
                 ResultSet rs = selectPreparedStatement.executeQuery();
                 List<Message> messages = new ArrayList<>();
                 while (rs.next()) {

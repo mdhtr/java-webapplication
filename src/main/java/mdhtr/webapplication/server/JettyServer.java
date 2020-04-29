@@ -36,7 +36,7 @@ public class JettyServer {
     private static final String ANY_PATH = "/*";
 
     private final Server server;
-    private int port;
+    private final int port;
 
 
     public JettyServer(int port) {

@@ -2,10 +2,10 @@ package mdhtr.webapplication.integration;
 
 import com.google.common.collect.ImmutableList;
 import io.restassured.http.ContentType;
-import mdhtr.webapplication.server.JettyServer;
 import mdhtr.webapplication.persistence.H2InMemoryDb;
 import mdhtr.webapplication.persistence.Message;
 import mdhtr.webapplication.persistence.MessageDao;
+import mdhtr.webapplication.server.JettyServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class MessageEndpointIntegrationTest {
     private static final String TEST_DB_URL = "jdbc:h2:mem:test";
     private static final String TEST_DB_USER = "";
     private static final String TEST_DB_PASSWORD = "";
-    private static String MESSAGE = "test message";
-    private static List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
-    private static String JSON_MESSAGES = "[{\"id\":1,\"message\":\"test message\"}]";
+    private static final String MESSAGE = "test message";
+    private static final List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
+    private static final String JSON_MESSAGES = "[{\"id\":1,\"message\":\"test message\"}]";
 
     private MessageDao dao;
     private JettyServer server;

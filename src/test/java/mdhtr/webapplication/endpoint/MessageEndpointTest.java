@@ -20,8 +20,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MessageEndpointTest {
-    private static String MESSAGE = "test message";
-    private static List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
+    private static final String MESSAGE = "test message";
+    private static final List<Message> MESSAGES = ImmutableList.of(new Message(1, MESSAGE));
     @Mock private MessageDao dao;
     private MessageEndpoint endpoint;
 

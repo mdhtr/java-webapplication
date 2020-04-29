@@ -2,6 +2,7 @@ package mdhtr.webapplication.persistence;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,9 +41,10 @@ public class H2InMemoryDb {
         return createConnection();
     }
 
+    @SneakyThrows
     private void loadDatabaseDriver() {
         try {
-            Class.forName(DRIVER).newInstance();
+            Class.forName(DRIVER).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(String.format("Class for database driver %s not found", DRIVER), e);
         }
