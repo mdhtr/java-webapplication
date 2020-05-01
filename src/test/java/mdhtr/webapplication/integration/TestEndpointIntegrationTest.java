@@ -154,6 +154,7 @@ class TestEndpointIntegrationTest {
                 .when()
                 .post("/api/test/validated")
                 .then()
+                .header("Content-Type", "application/problem+json")
                 .body(containsString("{\"type\":\"/docs/validation_error\",\"title\":\"Validation error\",\"status\":400,\"detail\":"))
                 .body(containsString("text: must not be null"))
                 .body(containsString("number: Number should be less than or equal to 99"))

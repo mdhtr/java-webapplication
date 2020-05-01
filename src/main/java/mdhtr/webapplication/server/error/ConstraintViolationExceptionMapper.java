@@ -15,6 +15,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
         log.warn("Exception on request", exception);
         return Response
                 .status(Response.Status.BAD_REQUEST)
+                .type("application/problem+json")
                 .entity(ProblemDetailsDto.builder()
                         .type(URI.create("/docs/validation_error"))
                         .status(Response.Status.BAD_REQUEST.getStatusCode())
