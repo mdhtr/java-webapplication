@@ -10,7 +10,7 @@
 
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-        <jetty.version>9.4.31.v20200723</jetty.version>
+        <jetty.version>11.0.1</jetty.version>
         <resteasy.version>3.11.2.Final</resteasy.version>
         <mockito.version>3.3.3</mockito.version>
         <selenium.version>3.141.59</selenium.version>
