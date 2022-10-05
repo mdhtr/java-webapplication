@@ -19,7 +19,7 @@
         <guava.version>29.0-jre</guava.version>
         <h2.version>1.4.200</h2.version>
         <lombok.version>1.18.12</lombok.version>
-        <jackson.version>2.11.0</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
