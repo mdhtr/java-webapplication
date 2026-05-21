@@ -5,12 +5,12 @@ import mdhtr.webapplication.endpoint.HealthEndpoint;
 import mdhtr.webapplication.endpoint.MessageEndpoint;
 import mdhtr.webapplication.endpoint.TestEndpoint;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 import java.util.Set;
 
 @ApplicationPath("")
-public class JavaxWsRsApplication extends Application {
+public class JakartaWsRsApplication extends Application {
     @Override
     public Set<Object> getSingletons() {
         return ImmutableSet.of(new MessageEndpoint(), new HealthEndpoint(), new TestEndpoint());

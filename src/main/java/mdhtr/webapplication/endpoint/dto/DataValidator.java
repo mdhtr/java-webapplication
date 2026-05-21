@@ -2,11 +2,11 @@ package mdhtr.webapplication.endpoint.dto;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.Set;
 
 abstract class DataValidator<T> extends StdConverter<T, T> {

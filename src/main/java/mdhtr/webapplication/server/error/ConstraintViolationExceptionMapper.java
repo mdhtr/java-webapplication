@@ -3,9 +3,9 @@ package mdhtr.webapplication.server.error;
 import lombok.extern.slf4j.Slf4j;
 import mdhtr.webapplication.server.error.dto.ProblemDetailsDto;
 
-import javax.validation.ConstraintViolationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
 import java.net.URI;
 
 @Slf4j

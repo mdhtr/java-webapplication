@@ -2,8 +2,8 @@ package mdhtr.webapplication.endpoint;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 @Path("/healthz")
 public class HealthEndpoint {

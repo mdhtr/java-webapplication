@@ -24,7 +24,7 @@ import static org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameter
 
 @Slf4j
 public class JettyServer {
-    private static final String JAVAX_WS_RS_APPLICATION = "javax.ws.rs.Application";
+    private static final String JAKARTA_WS_RS_APPLICATION = "jakarta.ws.rs.Application";
 
     private static final int STOP_TIMEOUT_MILLISECONDS = 5000;
     private static final String STATIC_CONTENT_RESOURCE_PATH = "/mdhtr/webapplication/public/";
@@ -90,7 +90,7 @@ public class JettyServer {
     private void addRestEasyServlet(ServletContextHandler contextHandler) {
         ServletHolder restEasyServlet = new ServletHolder(new HttpServletDispatcher());
         restEasyServlet.setInitParameter(RESTEASY_SERVLET_MAPPING_PREFIX, REST_API_BASE_PATH);
-        restEasyServlet.setInitParameter(JAVAX_WS_RS_APPLICATION, JavaxWsRsApplication.class.getName());
+        restEasyServlet.setInitParameter(JAKARTA_WS_RS_APPLICATION, JakartaWsRsApplication.class.getName());
         restEasyServlet.setInitParameter(RESTEASY_PROVIDERS, getExceptionMappers());
         contextHandler.addServlet(restEasyServlet, REST_API_BASE_PATH + ANY_PATH);
     }

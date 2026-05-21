@@ -1,6 +1,6 @@
 package mdhtr.webapplication.endtoend;
 
-import io.github.bonigarcia.seljup.SeleniumExtension;
+import io.github.bonigarcia.seljup.SeleniumJupiter;
 import mdhtr.webapplication.persistence.H2InMemoryDb;
 import mdhtr.webapplication.server.JettyServer;
 import org.junit.jupiter.api.AfterEach;
@@ -13,12 +13,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@ExtendWith(SeleniumExtension.class)
+@ExtendWith(SeleniumJupiter.class)
 class EndToEndTest {
     private static final int TEST_PORT = 9001;
     private static final String PAGE_URL = "http://localhost:" + TEST_PORT + "/";
@@ -91,7 +92,7 @@ class EndToEndTest {
 
     private void refreshPage(ChromeDriver driver) {
         driver.navigate().refresh();
-        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT_IN_SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_IN_SECONDS));
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#messages div"), 0));
     }
 
