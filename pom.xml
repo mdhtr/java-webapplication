@@ -10,10 +10,10 @@
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
-        <jetty.version>11.0.24</jetty.version>
+        <jetty.version>11.0.26</jetty.version>
         <resteasy.version>6.2.12.Final</resteasy.version>
         <mockito.version>5.15.2</mockito.version>
-        <selenium.version>4.27.0</selenium.version>
+        <selenium.version>4.33.0</selenium.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
         <guava.version>33.4.0-jre</guava.version>
         <h2.version>2.2.220</h2.version>
@@ -27,7 +27,9 @@
         <!-- TEST -->
         <hamcrest.version>3.0</hamcrest.version>
         <rest-assured.version>5.5.1</rest-assured.version>
-        <selenium-jupiter.version>5.1.1</selenium-jupiter.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <commons-codec.version>1.22.0</commons-codec.version>
+        <selenium-jupiter.version>6.3.2</selenium-jupiter.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     </properties>
 
@@ -147,6 +149,28 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

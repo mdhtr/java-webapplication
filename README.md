@@ -6,13 +6,13 @@ with a bunch of configuration examples
 ### Configuration
 * How to configure an Embedded Jetty Server with RestEasy and Jackson
 to serve static frontend files and also REST endpoints
-* How to connect to a H2 in-memory database
+* How to connect to an H2 in-memory database
 * How to serve static content from resources folder for development
 * How to configure logging with Logback and Slf4j
 ### REST API
 * How to do basic REST endpoints
 * How to process form data in an endpoint
-* How to process json data in an endpoint
+* How to process JSON data in an endpoint
 * How to map exceptions to the desired responses
 * How to validate a JSON parsed object during initialization
 ### Testing

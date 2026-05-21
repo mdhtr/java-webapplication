@@ -1,6 +1,5 @@
 package mdhtr.webapplication.server;
 
-import com.google.common.collect.ImmutableSet;
 import mdhtr.webapplication.endpoint.HealthEndpoint;
 import mdhtr.webapplication.endpoint.MessageEndpoint;
 import mdhtr.webapplication.endpoint.TestEndpoint;
@@ -12,7 +11,7 @@ import java.util.Set;
 @ApplicationPath("")
 public class JakartaWsRsApplication extends Application {
     @Override
-    public Set<Object> getSingletons() {
-        return ImmutableSet.of(new MessageEndpoint(), new HealthEndpoint(), new TestEndpoint());
+    public Set<Class<?>> getClasses() {
+        return Set.of(MessageEndpoint.class, HealthEndpoint.class, TestEndpoint.class);
     }
 }

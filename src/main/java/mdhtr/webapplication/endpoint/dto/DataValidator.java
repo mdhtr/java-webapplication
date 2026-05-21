@@ -12,11 +12,12 @@ import java.util.Set;
 abstract class DataValidator<T> extends StdConverter<T, T> {
     @Override
     public T convert(T t) {
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
-        Set<ConstraintViolation<T>> violations = validator.validate(t);
-        if (!violations.isEmpty()) {
-            throw new ConstraintViolationException(violations);
+        try (ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory()) {
+            Validator validator = validatorFactory.getValidator();
+            Set<ConstraintViolation<T>> violations = validator.validate(t);
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(violations);
+            }
         }
         return t;
     }
