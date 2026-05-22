@@ -209,6 +209,11 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <argLine>-Dnet.bytebuddy.experimental=true</argLine>
+                    <systemPropertyVariables>
+                        <sel.jup.output.folder>${project.build.directory}/surefire-reports</sel.jup.output.folder>
+                        <sel.jup.output.folder.per.class>true</sel.jup.output.folder.per.class>
+                        <sel.jup.screenshot.when.failure>true</sel.jup.screenshot.when.failure>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
